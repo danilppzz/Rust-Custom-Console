@@ -1,9 +1,15 @@
+use std::process::Command;
+
 fn main() {    
     Logger::info("This is an informational message");
     Logger::warn("This is a warning message");
     Logger::error("This is an error message");
     Logger::success("This is a success message");
     Logger::new(4);
+
+    let _ = Command::new("cmd")
+        .args(&["/C", "pause"])
+        .status();
 }
 
 struct Logger;
