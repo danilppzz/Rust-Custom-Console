@@ -1,6 +1,6 @@
 use std::process::Command;
 
-fn main() {    
+fn main() {
     Logger::info("This is an informational message");
     Logger::warn("This is a warning message");
     Logger::error("This is an error message");
