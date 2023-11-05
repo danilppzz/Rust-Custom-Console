@@ -1,6 +1,7 @@
 pub mod Logger;
 
-use std::{io::{self, Write}};
+use std::{io::{self, BufRead, Write}};
+use std::process::{Command, Stdio};
 
 struct ConsoleThread;
 
@@ -19,13 +20,42 @@ impl ConsoleThread {
             let command = input.trim();
 
             if command == "stop" {
-                println!("Press Enter to close...");
+                Logger::warn("Press Enter to close...", true);
                 ConsoleThread::stop_console();
                 break;
-            } else if command == "done" {
-                Logger::success("Done")
+            } else if command == "help" {
+                Logger::warn("Console Commands", true);
+                Logger::info("- help", false);
+                Logger::info("- stop", false);
+                Logger::info("- ping $ip", false);
+            } else if command.starts_with("ping") {
+                let parts: Vec<&str> = command.split_whitespace().collect();
+                if parts.len() < 2 {
+                    Logger::error("Invalid ping command. Usage: ping [IP]", true);
+                } else {
+                    let ip = parts[1];
+                    // Logger::info(&format!("Pinging IP: {}", ip), true);
+            
+                    let mut ping_process = Command::new("ping")
+                        .arg(ip)
+                        .stdout(Stdio::piped())
+                        .spawn()
+                        .expect("Failed to execute command");
+            
+                    if let Some(stdout) = ping_process.stdout.take() {
+                        let reader = io::BufReader::new(stdout);
+            
+                        for line in reader.lines() {
+                            if let Ok(line_content) = line {
+                                Logger::info(&line_content, false);
+                            }
+                        }
+                    }
+            
+                    ping_process.wait().expect("Failed to wait for command completion");
+                }
             } else {
-                Logger::error("Invalid Command")
+                Logger::error("Invalid Command", true);
             }
         }
 
