@@ -1,4 +1,5 @@
 pub mod Logger;
+pub mod Commands;
 
 use std::{io::{self, BufRead, Write}};
 use std::process::{Command, Stdio};
