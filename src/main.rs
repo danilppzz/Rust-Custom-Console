@@ -19,7 +19,7 @@ impl ConsoleThread {
             io::stdin().read_line(&mut input).unwrap();
             let command = input.trim();
 
-            if command == "stop" {
+            if command == "cls" || command == "clear" {
                 Logger::warn("Press Enter to close...", true);
                 ConsoleThread::stop_console();
                 break;
