@@ -24,8 +24,8 @@ impl ConsoleThread {
                 ConsoleThread::stop_console();
                 break;
             } else if command == "help" {
-                logger::info("┣━━ close ( Stop the console without exit. )", false);
-                logger::info("┗━━ ping $ip ( Make a ping with the ip you want. )", false);
+                logger::info("   ┣━ close ( Stop the console without exit. )", false);
+                logger::info("   ┗━ ping $ip ( Make a ping with the ip you want. )", false);
             } else if command.starts_with("ping") {
                 let parts: Vec<&str> = command.split_whitespace().collect();
                 if parts.len() < 2 {
