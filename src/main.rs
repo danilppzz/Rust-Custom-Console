@@ -11,7 +11,7 @@ impl ConsoleThread {
     }
 
     fn run() {
-        println!("soizx@1.0");
+        logger::title("1.0");
         while !STOP.load(std::sync::atomic::Ordering::Relaxed) {
             let mut input = String::new();
             print!("\x1b[37m>\x1b[0m ");

@@ -54,3 +54,11 @@ pub fn success(message: &str, prefix: bool) {
 pub fn close(message: &str) {
     println!("\x1b[33m{}\x1b[0m", message);
 }
+
+pub fn title(version: &str) {
+    println!("┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓");
+    println!("┃                                   ┃");
+    println!("┃  \x1b[35m ◠ ◡ ◠ \x1b[37m Welcome to \x1b[36m@\x1b[37msoizx-{}\x1b[0m    ┃", version);
+    println!("┃                                   ┃");
+    println!("┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛");
+}
