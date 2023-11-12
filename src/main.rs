@@ -23,13 +23,16 @@ impl ConsoleThread {
                 logger::close("Press Enter to close...");
                 ConsoleThread::stop_console();
                 break;
-            } else if command == "help" {
+            } else if command == "cloud" {
+                logger::info("Target /cloud/GET/ is disabled due the version.", false);
+            }  else if command == "help" {
+                logger::info("   ┣━ cloud ( Access command to the public cloud. )", false);
                 logger::info("   ┣━ close ( Stop the console without exit. )", false);
                 logger::info("   ┗━ ping $ip ( Make a ping with the ip you want. )", false);
             } else if command.starts_with("ping") {
                 let parts: Vec<&str> = command.split_whitespace().collect();
                 if parts.len() < 2 {
-                    logger::error("Invalid ping command. Usage: ping [IP]", true);
+                    logger::error("Invalid args, 2 arg should not be Null.", true);
                 } else {
                     let ip = parts[1];
                     // Logger::info(&format!("Pinging IP: {}", ip), true);
