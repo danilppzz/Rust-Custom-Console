@@ -25,7 +25,7 @@ impl ConsoleThread {
                 break;
             } else if command == "cloud" {
                 logger::info("Target /cloud/GET/ is disabled due the version.", false);
-            }  else if command == "help" {
+            } else if command == "help" {
                 logger::info("   ┣━ cloud ( Access command to the public cloud. )", false);
                 logger::info("   ┣━ close ( Stop the console without exit. )", false);
                 logger::info("   ┗━ ping $ip ( Make a ping with the ip you want. )", false);
@@ -36,24 +36,26 @@ impl ConsoleThread {
                 } else {
                     let ip = parts[1];
                     // Logger::info(&format!("Pinging IP: {}", ip), true);
-            
+
                     let mut ping_process = Command::new("ping")
                         .arg(ip)
                         .stdout(Stdio::piped())
                         .spawn()
                         .expect("Failed to execute command");
-            
+
                     if let Some(stdout) = ping_process.stdout.take() {
                         let reader = io::BufReader::new(stdout);
-            
+
                         for line in reader.lines() {
                             if let Ok(line_content) = line {
                                 logger::info(&line_content, false);
                             }
                         }
                     }
-            
-                    ping_process.wait().expect("Failed to wait for command completion");
+
+                    ping_process
+                        .wait()
+                        .expect("Failed to wait for command completion");
                 }
             } else {
                 logger::error("Invalid Command", true);
