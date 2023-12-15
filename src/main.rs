@@ -71,5 +71,16 @@ impl ConsoleThread {
 static STOP: std::sync::atomic::AtomicBool = std::sync::atomic::AtomicBool::new(false);
 
 fn main() {
+    if cfg!(target_os = "windows") && !std::path::Path::new("C:/Users/daniz/Desktop/Rust-Context/main.exe").exists() {
+        // Install the app if it's not already installed
+        Command::new("cargo")
+            .arg("install")
+            .arg("--path")
+            .arg(".")
+            .spawn()
+            .expect("Failed to install the app.");
+    }
+
+    // Your app-specific logic to run when already installed
     ConsoleThread::run();
 }
