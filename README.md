@@ -1,7 +1,7 @@
 # Rust Custom Console
 First you need to install [rust](https://www.rust-lang.org/tools/install) in your computer, then cone this repo from the command or download the zip package. If you only want to use the console I'll create a release for all updates, and you only have to download the executable of the console.
 ```
-git clone https://github.com/soizx/Discord-Soizx
+git clone https://github.com/danilppzz/Discord-Soizx
 ```
 
 # Commands
